@@ -38,6 +38,7 @@ Optionally the CloudTrail Logs can be stored in a CloudWatch LogGroup in the Clo
 
 | Name | Version |
 |------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.0 |
 | <a name="provider_aws.org_cloudtrail_admin"></a> [aws.org\_cloudtrail\_admin](#provider\_aws.org\_cloudtrail\_admin) | >= 5.0 |
 
 ## Modules
@@ -52,6 +53,7 @@ Optionally the CloudTrail Logs can be stored in a CloudWatch LogGroup in the Clo
 | Name | Type |
 |------|------|
 | [aws_cloudtrail.org_cloudtrail_mgmt](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudtrail) | resource |
+| [aws_ssm_parameter.module_version](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssm_parameter) | resource |
 | [aws_caller_identity.org_cloudtrail](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 
 ## Inputs
