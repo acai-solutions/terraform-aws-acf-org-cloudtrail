@@ -14,7 +14,6 @@
 ![checkov-shield]
 
 <!-- BEGIN_ACAI_DOCS -->
-
 <!-- DESCRIPTION -->
 This module will deploy the AWS Organization CloudTrail and the S3 bucket to store the logs encrypted with a KMS CMK.
 Optionally the CloudTrail Logs can be stored in a CloudWatch LogGroup in the CloudTrail Admin Account.
@@ -23,7 +22,7 @@ Optionally the CloudTrail Logs can be stored in a CloudWatch LogGroup in the Clo
 <!-- ARCHITECTURE -->
 ## Architecture
 
-![architecture][architecture-png]
+![architecture]
 
 <!-- END_ACAI_DOCS -->
 
@@ -90,11 +89,11 @@ See [LICENSE][license-url] for full details.
 [acai-shield]: https://img.shields.io/badge/maintained_by-acai.gmbh-CB224B?style=flat
 [acai-docs-shield]: https://img.shields.io/badge/documentation-docs.acai.gmbh-CB224B?style=flat
 [acai-url]: https://acai.gmbh
-[acai-docs-url]: https://docs.acai.gmbh
+[acai-docs-url]: https://docs.acai.gmbh/solution-acf/10_overview/
 [module-version-shield]: https://img.shields.io/badge/module_version-1.1.0-CB224B?style=flat
 [module-release-url]: https://github.com/acai-solutions/terraform-aws-acf-org-cloudtrail/releases
 [terraform-version-shield]: https://img.shields.io/badge/tf-%3E%3D1.3.9-blue.svg?style=flat&color=blueviolet
 [trivy-shield]: https://img.shields.io/badge/trivy-passed-green
 [checkov-shield]: https://img.shields.io/badge/checkov-passed-green
 [license-url]: https://github.com/acai-solutions/terraform-aws-acf-org-cloudtrail/tree/main/LICENSE.md
-[architecture-png]: ./docs/terraform-aws-acf-org-cloudtrail.png
+[architecture-g]: ./docs/terraform-aws-acf-org-cloudtrail.png
