@@ -44,8 +44,7 @@ locals {
     {
       "module_provider" = "ACAI GmbH",
       "module_name"     = "terraform-aws-acf-org-cloudtrail",
-      "module_source"   = "github.com/acai-consulting/terraform-aws-acf-org-cloudtrail",
-      "module_version"  = /*inject_version_start*/ "1.1.0" /*inject_version_end*/
+      "module_source"   = "github.com/acai-solutions/terraform-aws-acf-org-cloudtrail",
     }
   )
   core_configuration_to_write = {
@@ -61,6 +60,18 @@ locals {
   }
 }
 
+
+# ---------------------------------------------------------------------------------------------------------------------
+# ¦ MODULE VERSION
+# ---------------------------------------------------------------------------------------------------------------------
+resource "aws_ssm_parameter" "module_version" {
+  #checkov:skip=CKV2_AWS_34: AWS SSM Parameter should be Encrypted not required for module version
+  name           = "/acai/acf/org-cloudtrail/productversion"
+  type           = "String"
+  insecure_value = /*inject_version_start*/ "1.1.1" /*inject_version_end*/
+
+  tags = local.resource_tags
+}
 # ---------------------------------------------------------------------------------------------------------------------
 # ¦ CORE LOGGING - S3 BUCKET
 # ---------------------------------------------------------------------------------------------------------------------
