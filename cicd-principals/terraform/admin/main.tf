@@ -104,6 +104,7 @@ data "aws_iam_policy_document" "org_cloudtrail_admin" {
       "iam:GetRolePolicy",
       "iam:ListRolePolicies",
       "iam:ListAttachedRolePolicies",
+      "iam:ListInstanceProfilesForRole",
       "iam:CreateRole",
       "iam:DeleteRole",
       "iam:UpdateRole",
