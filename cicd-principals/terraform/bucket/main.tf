@@ -56,6 +56,7 @@ resource "aws_iam_role_policy" "org_cloudtrail_bucket" {
 }
 
 #tfsec:ignore:AVD-AWS-0057
+#trivy:ignore:AVD-AWS-0345
 data "aws_iam_policy_document" "org_cloudtrail_bucket" {
   #checkov:skip=CKV_AWS_111
   #checkov:skip=CKV_AWS_356

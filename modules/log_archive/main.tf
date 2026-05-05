@@ -475,6 +475,7 @@ data "aws_iam_policy_document" "cloudtrail_logs" {
 # ¦ S3 BUCKET NOTIFICATION
 # ---------------------------------------------------------------------------------------------------------------------
 #tfsec:ignore:avd-aws-0095  # only meta-data
+#trivy:ignore:AVD-AWS-0095  # only meta-data
 resource "aws_sns_topic" "s3_notification_sns" {
   #checkov:skip=CKV_AWS_26 : only metadata
   count = var.s3_bucket.notification_to_sns != null ? 1 : 0
