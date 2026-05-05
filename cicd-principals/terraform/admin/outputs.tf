@@ -9,12 +9,7 @@
 # For commercial licensing, contact: contact@acai.gmbh
 
 
-output "example" {
-  description = "results"
-  value       = module.example_complete
-}
-
-output "test_success" {
-  description = "test success indicator (consumed by terratest)"
-  value       = true
+output "iam_role_arn" {
+  description = "iam_role_arn"
+  value       = aws_iam_role.cicd_principal.arn
 }

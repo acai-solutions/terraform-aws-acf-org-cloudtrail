@@ -31,6 +31,7 @@ terraform {
 # ---------------------------------------------------------------------------------------------------------------------
 data "aws_caller_identity" "org_cloudtrail" {}
 data "aws_region" "org_cloudtrail" {}
+data "aws_partition" "current" {}
 
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -65,7 +66,7 @@ data "aws_iam_policy_document" "org_cloudtrail_kms" {
     effect = "Allow"
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::${data.aws_caller_identity.org_cloudtrail.account_id}:root"]
+      identifiers = ["arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.org_cloudtrail.account_id}:root"]
     }
     actions   = ["kms:*"]
     resources = ["*"]
@@ -98,7 +99,8 @@ data "aws_iam_policy_document" "org_cloudtrail_kms" {
       variable = "kms:EncryptionContext:aws:logs:arn"
       values = [
         format(
-          "arn:aws:logs:%s:%s:log-group:%s",
+          "arn:%s:logs:%s:%s:log-group:%s",
+          data.aws_partition.current.partition,
           data.aws_region.org_cloudtrail.name,
           data.aws_caller_identity.org_cloudtrail.account_id,
           var.cloudwatch_loggroup.loggroup_name
