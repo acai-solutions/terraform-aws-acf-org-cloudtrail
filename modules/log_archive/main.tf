@@ -210,6 +210,8 @@ resource "aws_s3_bucket_lifecycle_configuration" "cloudtrail_logs" {
     id     = "log"
     status = "Enabled"
 
+    filter {}
+
     # Only add the transition rule if days_to_glacier is not -1
     dynamic "transition" {
       for_each = var.s3_bucket.days_to_glacier != -1 ? [1] : []
@@ -284,6 +286,8 @@ resource "aws_s3_bucket_lifecycle_configuration" "cloudtrail_logs_access" {
   rule {
     id     = "log"
     status = "Enabled"
+
+    filter {}
 
     # Only add the transition rule if days_to_glacier is not -1
     dynamic "transition" {

@@ -1,4 +1,4 @@
-# terraform-aws-acf-org-cloudtrail
+# AWS Organization CloudTrail - ACF Terraform Module
 
 <!-- LOGO -->
 <a href="https://acai.gmbh">    
@@ -88,7 +88,7 @@ See [LICENSE][license-url] for full details.
 <!-- COPYRIGHT -->
 <br />
 <br />
-<p align="center">Copyright &copy; 2024 ACAI GmbH</p>
+<p align="center">Copyright ACAI GmbH</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [acai-shield]: https://img.shields.io/badge/maintained_by-acai.gmbh-CB224B?style=flat

@@ -91,7 +91,7 @@ data "aws_iam_policy_document" "org_cloudtrail_kms" {
     principals {
       type = "Service"
       identifiers = [
-        format("logs.%s.amazonaws.com", data.aws_region.org_cloudtrail.name)
+        format("logs.%s.amazonaws.com", data.aws_region.org_cloudtrail.region)
       ]
     }
     condition {
@@ -101,7 +101,7 @@ data "aws_iam_policy_document" "org_cloudtrail_kms" {
         format(
           "arn:%s:logs:%s:%s:log-group:%s",
           data.aws_partition.current.partition,
-          data.aws_region.org_cloudtrail.name,
+          data.aws_region.org_cloudtrail.region,
           data.aws_caller_identity.org_cloudtrail.account_id,
           var.cloudwatch_loggroup.loggroup_name
         )
