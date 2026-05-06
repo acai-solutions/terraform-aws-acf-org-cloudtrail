@@ -104,4 +104,4 @@ See [LICENSE][license-url] for full details.
 [trivy-shield]: https://img.shields.io/badge/trivy-passed-green
 [checkov-shield]: https://img.shields.io/badge/checkov-passed-green
 [license-url]: https://github.com/acai-solutions/terraform-aws-acf-org-cloudtrail/tree/main/LICENSE.md
-[architecture-g]: ./docs/terraform-aws-acf-org-cloudtrail.png
+[architecture]: ./docs/terraform-aws-acf-org-cloudtrail.png
