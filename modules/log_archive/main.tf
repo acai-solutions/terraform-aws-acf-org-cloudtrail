@@ -31,6 +31,7 @@ terraform {
 # ---------------------------------------------------------------------------------------------------------------------
 data "aws_caller_identity" "org_cloudtrail_bucket_target" {}
 data "aws_organizations_organization" "org_cloudtrail_bucket_target" {}
+data "aws_partition" "current" {}
 
 # ---------------------------------------------------------------------------------------------------------------------
 # ¦ KMS KEY
@@ -60,7 +61,7 @@ data "aws_iam_policy_document" "core_logging_cloudtrail_mgmt_kms" {
 
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::${data.aws_caller_identity.org_cloudtrail_bucket_target.account_id}:root"]
+      identifiers = ["arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.org_cloudtrail_bucket_target.account_id}:root"]
     }
 
     actions   = ["kms:*"]
@@ -83,7 +84,7 @@ data "aws_iam_policy_document" "core_logging_cloudtrail_mgmt_kms" {
       test     = "StringLike"
       variable = "kms:EncryptionContext:aws:cloudtrail:arn"
       values = [
-        "arn:aws:cloudtrail:*:${var.org_mgmt_account_id}:trail/*"
+        "arn:${data.aws_partition.current.partition}:cloudtrail:*:${var.org_mgmt_account_id}:trail/*"
       ]
     }
   }
@@ -209,6 +210,8 @@ resource "aws_s3_bucket_lifecycle_configuration" "cloudtrail_logs" {
     id     = "log"
     status = "Enabled"
 
+    filter {}
+
     # Only add the transition rule if days_to_glacier is not -1
     dynamic "transition" {
       for_each = var.s3_bucket.days_to_glacier != -1 ? [1] : []
@@ -283,6 +286,8 @@ resource "aws_s3_bucket_lifecycle_configuration" "cloudtrail_logs_access" {
   rule {
     id     = "log"
     status = "Enabled"
+
+    filter {}
 
     # Only add the transition rule if days_to_glacier is not -1
     dynamic "transition" {
@@ -452,7 +457,8 @@ data "aws_iam_policy_document" "cloudtrail_logs" {
       ]
       resources = [
         format(
-          "arn:aws:s3:::%s/AWSLogs/%s/$${aws:PrincipalAccount}/*",
+          "arn:%s:s3:::%s/AWSLogs/%s/$${aws:PrincipalAccount}/*",
+          data.aws_partition.current.partition,
           aws_s3_bucket.cloudtrail_logs.id,
           data.aws_organizations_organization.org_cloudtrail_bucket_target.id
         )
@@ -473,6 +479,7 @@ data "aws_iam_policy_document" "cloudtrail_logs" {
 # ¦ S3 BUCKET NOTIFICATION
 # ---------------------------------------------------------------------------------------------------------------------
 #tfsec:ignore:avd-aws-0095  # only meta-data
+#trivy:ignore:AVD-AWS-0095  # only meta-data
 resource "aws_sns_topic" "s3_notification_sns" {
   #checkov:skip=CKV_AWS_26 : only metadata
   count = var.s3_bucket.notification_to_sns != null ? 1 : 0

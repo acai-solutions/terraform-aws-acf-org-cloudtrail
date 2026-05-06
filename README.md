@@ -1,4 +1,4 @@
-# terraform-aws-acf-org-cloudtrail
+# AWS Organization CloudTrail - ACF Terraform Module
 
 <!-- LOGO -->
 <a href="https://acai.gmbh">    
@@ -9,7 +9,10 @@
 [![Maintained by acai.gmbh][acai-shield]][acai-url]
 [![documentation][acai-docs-shield]][acai-docs-url]  
 ![module-version-shield]
-![terraform-version-shield]  
+![terraform-tested-shield]
+![opentofu-tested-shield]  
+![aws-tested-shield]
+![aws-esc-tested-shield]  
 ![trivy-shield]
 ![checkov-shield]
 
@@ -85,7 +88,7 @@ See [LICENSE][license-url] for full details.
 <!-- COPYRIGHT -->
 <br />
 <br />
-<p align="center">Copyright &copy; 2024 ACAI GmbH</p>
+<p align="center">Copyright ACAI GmbH</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [acai-shield]: https://img.shields.io/badge/maintained_by-acai.gmbh-CB224B?style=flat
@@ -94,8 +97,11 @@ See [LICENSE][license-url] for full details.
 [acai-docs-url]: https://docs.acai.gmbh/solution-acf/10_overview/
 [module-version-shield]: https://img.shields.io/badge/module_version-1.1.1-CB224B?style=flat
 [module-release-url]: https://github.com/acai-solutions/terraform-aws-acf-org-cloudtrail/releases
-[terraform-version-shield]: https://img.shields.io/badge/tf-%3E%3D1.3.9-blue.svg?style=flat&color=blueviolet
+[terraform-tested-shield]: https://img.shields.io/badge/terraform-%3E%3D1.5.7_tested-844FBA?style=flat&logo=terraform&logoColor=white
+[opentofu-tested-shield]: https://img.shields.io/badge/opentofu-%3E%3D1.6_tested-FFDA18?style=flat&logo=opentofu&logoColor=black
+[aws-tested-shield]: https://img.shields.io/badge/AWS-%E2%9C%93_tested-FF9900?style=flat&logo=amazonaws&logoColor=white
+[aws-esc-tested-shield]: https://img.shields.io/badge/AWS_ESC-%E2%9C%93_tested-003399?style=flat&logo=amazonaws&logoColor=white
 [trivy-shield]: https://img.shields.io/badge/trivy-passed-green
 [checkov-shield]: https://img.shields.io/badge/checkov-passed-green
 [license-url]: https://github.com/acai-solutions/terraform-aws-acf-org-cloudtrail/tree/main/LICENSE.md
-[architecture-g]: ./docs/terraform-aws-acf-org-cloudtrail.png
+[architecture]: ./docs/terraform-aws-acf-org-cloudtrail.png
