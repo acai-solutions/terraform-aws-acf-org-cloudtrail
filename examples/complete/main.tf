@@ -29,12 +29,14 @@ terraform {
 # ---------------------------------------------------------------------------------------------------------------------
 # ¦ DATA
 # ---------------------------------------------------------------------------------------------------------------------
-data "aws_caller_identity" "core_logging" {
-  provider = aws.core_logging
-}
+data "aws_partition" "current" { provider = aws.org_mgmt }
 
 data "aws_caller_identity" "org_mgmt" {
   provider = aws.org_mgmt
+}
+
+data "aws_caller_identity" "core_logging" {
+  provider = aws.core_logging
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -46,55 +48,6 @@ resource "random_string" "suffix" {
   upper   = false
 }
 
-# ---------------------------------------------------------------------------------------------------------------------
-# ¦ CREATE PROVISIONERS
-# ---------------------------------------------------------------------------------------------------------------------
-# Org-mgmt provisioner: deploys the Organization CloudTrail and CloudWatch LogGroup.
-module "create_provisioner_admin" {
-  source = "../../cicd-principals/terraform/admin"
-
-  iam_role_settings = {
-    name = "org_cloudtrail_admin_cicd_provisioner"
-    aws_trustee_arns = [
-      "arn:${var.aws_partition}:iam::${var.account_ids.org_mgmt}:root"
-    ]
-  }
-  providers = {
-    aws = aws.org_mgmt
-  }
-}
-
-# Core-logging provisioner: deploys the CloudTrail S3 log archive bucket.
-module "create_provisioner_bucket" {
-  source = "../../cicd-principals/terraform/bucket"
-
-  iam_role_settings = {
-    name = "org_cloudtrail_bucket_cicd_provisioner"
-    aws_trustee_arns = [
-      "arn:${var.aws_partition}:iam::${var.account_ids.org_mgmt}:root"
-    ]
-  }
-  providers = {
-    aws = aws.core_logging
-  }
-}
-
-# Region-pinned providers, each assuming the corresponding provisioner role.
-provider "aws" {
-  region = var.aws_region
-  alias  = "org_cloudtrail_admin"
-  assume_role {
-    role_arn = module.create_provisioner_admin.iam_role_arn
-  }
-}
-
-provider "aws" {
-  region = var.aws_region
-  alias  = "org_cloudtrail_bucket"
-  assume_role {
-    role_arn = module.create_provisioner_bucket.iam_role_arn
-  }
-}
 
 # ---------------------------------------------------------------------------------------------------------------------
 # ¦ MODULE
@@ -109,7 +62,7 @@ data "aws_iam_policy_document" "org_cloudtrail_kms" {
     principals {
       type = "AWS"
       identifiers = [
-        "arn:${var.aws_partition}:iam::${data.aws_caller_identity.org_mgmt.account_id}:root",
+        "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.org_mgmt.account_id}:root",
       ]
     }
     actions   = ["kms:*"]
