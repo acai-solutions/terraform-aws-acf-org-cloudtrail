@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0](https://github.com/acai-solutions/terraform-aws-acf-org-cloudtrail/compare/1.1.1...1.2.0) (2026-05-06)
+
+
+### Features
+
+* support ESC and OpenTofu ([#3](https://github.com/acai-solutions/terraform-aws-acf-org-cloudtrail/issues/3)) ([72fa423](https://github.com/acai-solutions/terraform-aws-acf-org-cloudtrail/commit/72fa423975faa9fc112a910371ea8cc1ae7f0a52))
+
 ## [1.1.1](https://github.com/acai-solutions/terraform-aws-acf-org-cloudtrail/compare/1.1.0...1.1.1) (2025-12-09)
 
 
